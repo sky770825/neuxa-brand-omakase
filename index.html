@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>嵐亭 — 日式無菜單料理</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0d0d0d;
+      --charcoal: #1a1814;
+      --green: #2d4a3e;
+      --green-light: #4a7c6a;
+      --gold: #b8955a;
+      --gold-light: #d4b87a;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --text: #2a2018;
+      --gray: #888;
+      --border: #3a3028;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(13,13,13,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Noto Serif TC', serif; font-size: 22px; font-weight: 700; color: var(--gold); text-decoration: none; letter-spacing: 0.1em; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { color: var(--cream); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { background: var(--green); color: var(--white) !important; padding: 9px 22px; border-radius: 4px; font-size: 13px !important; font-weight: 600 !important; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--green-light); }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; background: var(--charcoal); padding: 0 48px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; right: -50px; top: -50px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(184,149,90,0.1) 0%, transparent 70%); border-radius: 50%; }
+    .hero-content { flex: 1; max-width: 560px; padding: 120px 0; position: relative; z-index: 1; }
+    .hero-badge { display: inline-block; background: rgba(184,149,90,0.15); color: var(--gold); border: 1px solid rgba(184,149,90,0.3); font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 6px 14px; border-radius: 2px; margin-bottom: 24px; }
+    .hero h1 { font-family: 'Noto Serif TC', serif; font-size: clamp(44px, 7vw, 80px); font-weight: 900; line-height: 1.15; color: var(--cream); margin-bottom: 24px; }
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero-sub { font-size: 16px; color: rgba(245,240,232,0.6); font-weight: 300; margin-bottom: 36px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-green { background: var(--green); color: var(--white); padding: 14px 32px; border-radius: 4px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-green:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-gold { border: 1.5px solid var(--gold); color: var(--gold); padding: 14px 32px; border-radius: 4px; font-size: 14px; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-gold:hover { background: rgba(184,149,90,0.1); }
+    .hero-img-col { flex: 1; display: flex; justify-content: center; align-items: center; padding: 120px 0; }
+    .hero-img { width: 100%; max-width: 460px; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+
+    .marquee-strip { background: var(--green); padding: 12px 0; overflow: hidden; }
+    .marquee-track { display: flex; gap: 60px; animation: marquee 25s linear infinite; white-space: nowrap; }
+    .marquee-strip span { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .philosophy { padding: 100px 48px; background: var(--cream); }
+    .philosophy-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .philosophy-inner .eyebrow { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .philosophy-inner h2 { font-family: 'Noto Serif TC', serif; font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: var(--text); margin-bottom: 24px; }
+    .philosophy-inner p { font-size: 16px; color: var(--gray); line-height: 1.9; max-width: 640px; margin: 0 auto; }
+
+    .menu-section { padding: 100px 48px; background: var(--charcoal); }
+    .section-header { max-width: 1100px; margin: 0 auto 56px; text-align: center; }
+    .section-header .eyebrow { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-header h2 { font-family: 'Noto Serif TC', serif; font-size: 36px; font-weight: 700; color: var(--cream); }
+    .menu-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .menu-card { background: var(--black); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+    .menu-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .menu-card img { width: 100%; aspect-ratio: 16/10; object-fit: cover; }
+    .menu-card-body { padding: 28px; }
+    .menu-card h3 { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; color: var(--cream); margin-bottom: 8px; }
+    .menu-card p { font-size: 13px; color: rgba(245,240,232,0.5); margin-bottom: 16px; }
+    .menu-price { font-size: 22px; font-weight: 700; color: var(--gold); }
+    .menu-price small { font-size: 13px; font-weight: 400; color: var(--gray); margin-left: 4px; }
+
+    .courses { background: var(--green); padding: 80px 48px; }
+    .courses-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .courses-inner h2 { font-family: 'Noto Serif TC', serif; font-size: 32px; font-weight: 700; color: var(--white); margin-bottom: 48px; }
+    .courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .course-item { background: rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; text-align: center; }
+    .course-item h3 { font-family: 'Noto Serif TC', serif; font-size: 24px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .course-item p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+    .course-item .price { font-size: 28px; font-weight: 700; color: var(--white); }
+
+    .locations { padding: 100px 48px; background: var(--cream); }
+    .locations-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .location-card { background: var(--white); border-radius: 16px; padding: 36px; }
+    .location-card h3 { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .location-card p { font-size: 14px; color: var(--gray); margin-bottom: 4px; }
+    .location-status { margin-top: 20px; display: flex; align-items: center; gap: 8px; font-size: 13px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-light); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+
+    footer { background: var(--black); padding: 64px 48px 32px; border-top: 1px solid var(--border); }
+    .footer-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .nav-logo { font-size: 26px; display: inline-block; margin-bottom: 16px; }
+    .footer-brand p { font-size: 13px; color: rgba(245,240,232,0.4); line-height: 1.8; }
+    .footer-col h4 { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 600; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul a { color: rgba(245,240,232,0.4); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--gold); }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 32px; border-top: 1px solid var(--border); font-size: 12px; color: rgba(245,240,232,0.3); display: flex; justify-content: space-between; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hero { flex-direction: column; padding: 0 24px; }
+      .hero-content { padding: 120px 0 40px; }
+      .hero-img-col { padding: 0 0 60px; }
+      .menu-grid, .locations-grid, .courses-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">嵐亭</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">品牌精神</a></li>
+    <li><a href="#menu">套餐</a></li>
+    <li><a href="#locations">據點</a></li>
+    <li><a href="#reservation" class="nav-cta">線上預約</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">★ 無菜單料理 · 台北</div>
+    <h1>一期一會<br><em>嵐亭</em></h1>
+    <p class="hero-sub">不提供菜單，因為每一次，都是限定。職人根據當日食材，親手設計你的這一顿。</p>
+    <div class="hero-actions">
+      <a href="#reservation" class="btn-green">線上預約</a>
+      <a href="#menu" class="btn-gold">套餐說明</a>
+    </div>
+  </div>
+  <div class="hero-img-col">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1578985545062-69928b1b9587?w=600&q=80" alt="日式無菜單料理">
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>🍣  Omakase &nbsp;&nbsp;🌿  當日食材 &nbsp;&nbsp;📅  完全預約制 &nbsp;&nbsp;🎌  日本職人 &nbsp;&nbsp;🏯  包廂可</span>
+    <span>🍣  Omakase &nbsp;&nbsp;🌿  當日食材 &nbsp;&nbsp;📅  完全預約制 &nbsp;&nbsp;🎌  日本職人 &nbsp;&nbsp;🏯  包廂可</span>
+  </div>
+</div>
+
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <p class="eyebrow">品牌精神</p>
+    <h2>一期一會<br>把每一次都當最後一次</h2>
+    <p>嵐亭不提供固定菜單。每一份食材，都是主廚當日親自至基隆崁仔頂採購，每一次都是限定組合。</p>
+    <p> Omakase 的精神在於「信任」——你把今晚交給主廚，主廚用他數十年的經歷，回報你一份感動。</p>
+  </div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <p class="eyebrow">套餐選擇</p>
+    <h2>嵐亭 Omakase</h2>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1b9587?w=600&q=80" alt="初昔套餐">
+      <div class="menu-card-body">
+        <h3>初昔套餐</h3>
+        <p>8 道菜，含：先付、造身、揚物、炙燒、卷物、甘味。適合初次體驗 Omakase 的客人。</p>
+        <div class="menu-price">NT$ 1,800 <small>/ 人</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="山吹套餐">
+      <div class="menu-card-body">
+        <h3>山吹套餐</h3>
+        <p>12 道菜，含：先付、造身、燒烤、握壽司、卷物、甘味。完整體驗嵐亭的職人精神。</p>
+        <div class="menu-price">NT$ 2,800 <small>/ 人</small></div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="旬套餐">
+      <div class="menu-card-body">
+        <h3>旬套餐</h3>
+        <p>15 道菜，含：全套 Omakase + 限定食材 + 主廚創意料理。適合紀念日、商務宴請。</p>
+        <div class="menu-price">NT$ 4,200 <small>/ 人</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="courses">
+  <div class="courses-inner">
+    <h2>線上預約套餐</h2>
+    <div class="courses-grid">
+      <div class="course-item">
+        <h3>初昔</h3>
+        <p>8 道菜 · 90 分鐘</p>
+        <div class="price">NT$ 1,800</div>
+      </div>
+      <div class="course-item">
+        <h3>山吹</h3>
+        <p>12 道菜 · 120 分鐘</p>
+        <div class="price">NT$ 2,800</div>
+      </div>
+      <div class="course-item">
+        <h3>旬</h3>
+        <p>15 道菜 · 150 分鐘</p>
+        <div class="price">NT$ 4,200</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="locations" id="locations">
+  <div class="locations-grid">
+    <div class="location-card">
+      <h3>台北・信義店</h3>
+      <p>台北市信義區忠孝東路五段 68 號</p>
+      <p>捷運市政府站 3 號出口步行 5 分鐘</p>
+      <p>電話：(02) 2758-9933</p>
+      <p>18:00 - 22:00（完全預約制）</p>
+      <div class="location-status"><span class="status-dot"></span><span style="color:var(--green-light)">接受預約</span></div>
+    </div>
+    <div class="location-card">
+      <h3>台北・大安店</h3>
+      <p>台北市大安區仁愛路四段 118 號</p>
+      <p>捷運忠孝敦化站步行 5 分鐘</p>
+      <p>電話：(02) 2775-9933</p>
+      <p>18:00 - 22:00（完全預約制）</p>
+      <div class="location-status"><span class="status-dot"></span><span style="color:var(--green-light)">接受預約</span></div>
+    </div>
+    <div class="location-card">
+      <h3>新北・板橋店</h3>
+      <p>新北市板橋區中山路一段 168 號</p>
+      <p>捷運府中站步行 6 分鐘</p>
+      <p>電話：(03) 555-9933</p>
+      <p>18:00 - 21:30（完全預約制）</p>
+      <div class="location-status"><span class="status-dot" style="background:#facc15"></span><span style="color:#facc15">12 月開放</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">嵐亭</a>
+      <p>一期一會。把每一次，都當最後一次。這是嵐亭對 Omakase 的堅持。</p>
+    </div>
+    <div class="footer-col">
+      <h4>套餐</h4>
+      <ul>
+        <li><a href="#">初昔套餐</a></li>
+        <li><a href="#">山吹套餐</a></li>
+        <li><a href="#">旬套餐</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>聯絡</h4>
+      <ul>
+        <li><a href="tel:0227589933">02-2758-9933</a></li>
+        <li><a href="mailto:info@ranting.tw">info@ranting.tw</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 嵐亭 Ranting Omakase. All rights reserved.</span>
+    <span>台北市信義區忠孝東路五段 68 號</span>
+  </div>
+</footer>
+
+</body>
+</html>
